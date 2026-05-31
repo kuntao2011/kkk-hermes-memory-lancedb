@@ -1,0 +1,43 @@
+name: memory-lancedb
+version: 1.0.0
+description: >
+  LanceDB Vector Memory Provider with hybrid search (HNSW + FTS),
+  Reciprocal Rank Fusion, metadata enrichment, and time-range filtering.
+  Uses Ollama bge-m3:567m for local embeddings — no external API needed.
+author: Kun. Tao
+license: MIT
+category: memory
+dependencies:
+  - lancedb>=0.30.0
+  - numpy
+  - requests
+  - pyarrow
+config_schema:
+  base_url:
+    type: string
+    default: "http://localhost:11434"
+    description: "Ollama server URL"
+  embedding_model:
+    type: string
+    default: "bge-m3:567m"
+    description: "Embedding model available in Ollama"
+  vector_dim:
+    type: integer
+    default: 1024
+    description: "Embedding vector dimension (bge-m3 = 1024)"
+  lance_dir:
+    type: string
+    default: "$HERMES_HOME/lance_memory"
+    description: "LanceDB data directory"
+  batch_size:
+    type: integer
+    default: 32
+    description: "Max texts per embedding batch"
+  search_top_k:
+    type: integer
+    default: 5
+    description: "Default top-k results per search"
+  min_content_len:
+    type: integer
+    default: 50
+    description: "Skip content shorter than this (chars)"
