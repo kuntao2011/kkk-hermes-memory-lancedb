@@ -187,7 +187,11 @@ def _load_plugin_config() -> dict:
         config = load_config()
     except Exception:
         return {}
-    return cfg_get(config, "plugins", "lancedb-embed", default={}) or {}
+    # Try memory-lancedb first (this plugin's own key), fallback to lancedb-embed (backward compat)
+    cfg = cfg_get(config, "plugins", "memory-lancedb", default={}) or {}
+    if not cfg:
+        cfg = cfg_get(config, "plugins", "lancedb-embed", default={}) or {}
+    return cfg
 
 
 # ---------------------------------------------------------------------------
@@ -209,7 +213,7 @@ class LanceDBMemoryProvider(MemoryProvider):
 
     @property
     def name(self) -> str:
-        return "lancedb-embed"
+        return "memory-lancedb"
 
     def is_available(self) -> bool:
         base_url = self._config.get("base_url", "http://localhost:11434")
@@ -242,7 +246,7 @@ class LanceDBMemoryProvider(MemoryProvider):
                 with open(config_path) as f:
                     existing = yaml.safe_load(f) or {}
             existing.setdefault("plugins", {})
-            existing["plugins"]["lancedb-embed"] = values
+            existing["plugins"]["memory-lancedb"] = values
             with open(config_path, "w") as f:
                 yaml.dump(existing, f, default_flow_style=False)
         except Exception as e:
