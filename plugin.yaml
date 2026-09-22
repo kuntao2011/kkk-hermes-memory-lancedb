@@ -4,7 +4,7 @@ description: >
   LanceDB Vector Memory Provider with hybrid search (HNSW + FTS),
   Reciprocal Rank Fusion, metadata enrichment, and time-range filtering.
   Uses Ollama bge-m3:567m for local embeddings — no external API needed.
-author: Kun. Tao
+author: kuntao2011
 license: MIT
 category: memory
 dependencies:

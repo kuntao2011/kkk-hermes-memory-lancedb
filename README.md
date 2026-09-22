@@ -1,5 +1,7 @@
 # Hermes Memory LanceDB Plugin
 
+> ⚠️ **已归档 / ARCHIVED** — 此插件已停止维护，继任者为 [kkk-hermes-memory-zvec](https://github.com/kuntao2011/kkk-hermes-memory-zvec)（zvec 后端）。
+
 独立安装的 Hermes memory provider 插件，提供 **混合检索**（HNSW 向量 + FTS 全文）能力。
 
 ## 特性
@@ -14,7 +16,7 @@
 ## 安装
 
 ```bash
-hermes plugins install kuntao2011/hermes-memory-lancedb
+hermes plugins install kuntao2011/kkk-hermes-memory-lancedb
 ```
 
 ## 配置
